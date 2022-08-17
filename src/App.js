@@ -1,27 +1,33 @@
-import React from 'react';
-
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './pages/Layout';
-import Home from './pages/Home';
-import NoPage from './pages/NoPage';
-import User from './pages/User';
-import UserEdit from './pages/UserEdit';
-
-export default function App() {
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import HomeEcoBicycle from "./Layout/Home/home.ecobicycle";
+import ContentsEco from "./Layout/Contents/contents.eco";
+import MainEco from "./Page/Main/main.eco";
+import EcoSignin from "./Components/Authentication/Eco.SignIn/Eco.Signin";
+import BuyCardEco from "./Page/BuyCard";
+import Prepaid from "./Page/BuyCard/Prepaid/Prepaid";
+import EcoMembership from "./Components/Authentication/Eco.SignIn/Membership/Eco.Membership";
+import EcoCreateMember from "./Components/Authentication/Eco.SignIn/CreateMember/EcoCreateMember";
+import LoginAccount from "./Components/Authentication/Eco.Signup/LoginAccount";
+import Demo from "./Components/Authentication/Eco.Signup/Demo";
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="user/:id" element={<User />} />
-          <Route path="useredit/:id" element={<UserEdit />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+        <Router>
+          <Routes>
+            <Route path='/' element={<HomeEcoBicycle/>}>
+                <Route path='sign_account' element={<LoginAccount/>}/>
+                <Route index element={<ContentsEco/>}/>
+                <Route path='signup' element={<EcoSignin/>}></Route>
+                <Route  path='signup/new_signin' element={<EcoMembership/>}/>
+                <Route  path='signup/new_signin/create_account' element={<Demo/>}/>
+                <Route path='main' element={<MainEco/>}></Route>
+                <Route path='main/buy_card' element={<BuyCardEco/>}></Route>
+                <Route path='main/buy_card/prepaid' element={<Prepaid/>}></Route>
+            </Route>
+          </Routes>
+        </Router>
+    </>
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+export default App;
